@@ -1,9 +1,20 @@
-<header class="flex justify-between items-center">
-    <img src="" alt="Logo TREX">
+---
+import Button from "./Button.astro";
+---
 
-    <nav>
+<header class="mx-auto flex justify-between items-center py-7 w-[1220px]">
+    <img
+        class="w-30" 
+        src="" 
+        alt="Logo TREX"
+    />
+
+    <nav class="flex flex-row gap-x-20 opacity-80">
         <a href="/">Inicio</a>
         <a href="/nuestra-empresa">Nuestra empresa</a>
         <a href="/servicios-proyectos">Servicios y proyectos</a>
+        <Button>
+            <a href="/contacto">Contacto</a>
+        </Button>
     </nav>
 </header>
