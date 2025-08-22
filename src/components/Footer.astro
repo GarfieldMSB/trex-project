@@ -1,0 +1,60 @@
+---
+import TrexLogo from "../assets/TREX_1.png";
+import MapIcon from "../components/Map.astro";
+import PhoneIcon from "../components/Phone.astro";
+import MailIcon from "../components/Mail.astro";
+---
+
+<footer class="w-full bg-[#304d6d] py-15 px-30 text-white text-[14px]">
+    <div class="mx-auto max-w-[1300px] flex justify-evenly">
+        <div class="max-w-70">
+            <img
+                class="w-30 mb-5" 
+                src={TrexLogo.src} 
+                alt="Logo TREX"
+            />
+            <p>
+                Expertos en soluciones TI para el sector financiero, productivo y de servicios.
+                Integramos plataformas, desarrollamos proyectos y brindamos consultoría 
+                especializada en tecnología, ingeniería de sistemas y comunicaciones. 
+            </p>
+        </div>
+        <nav class="flex flex-col gap-y-3">
+            <h1 class="text-xl font-bold">Navegación</h1>
+            <a href="/">Inicio</a>
+            <a href="/nuestra-empresa">Nuestra empresa</a>
+            <a href="/servicios-proyectos">Servicios y proyectos</a>
+            <a href="/contacto" class="flex items-center">Contacto</a>
+        </nav>
+    
+        <nav class="flex flex-col gap-y-3">
+            <h1 class="text-xl font-bold">Información</h1>
+            <div>
+                <a href="/" class="flex gap-2">
+                    <MapIcon class="" />
+                    Huérfanos 1160, Oficina 1008
+                </a>
+                <a href="/" class="flex gap-2">
+                    <MapIcon class="" />
+                    Suecia 0142, Oficina 503
+                </a>
+            </div>
+            <div>
+                <a href="/" class="flex gap-2">
+                    <PhoneIcon />
+                    +569 XXXX XXXX
+                </a>
+                <a href="/" class="flex gap-2">
+                    <PhoneIcon />
+                    +569 XXXX XXXX
+                </a>
+            </div>
+            <div>
+                <a href="/" class="flex gap-2">
+                    <MailIcon />
+                    trex@3rex.cl
+                </a>
+            </div>
+        </nav>
+    </div>
+</footer>
