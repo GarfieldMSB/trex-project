@@ -1,4 +1,5 @@
 ---
+import Card from '../components/Card.astro';
 import Circle from '../components/Circle.astro';
 import Layout from '../layouts/Layout.astro';
 
@@ -19,18 +20,20 @@ import Layout from '../layouts/Layout.astro';
                 para impulsar la competitividad de nuestros clientes.
             </h2>
 
-            
-            <a 
-                href="#" 
-                class="block p-6 bg-white border w-full mt-10
-                    border-gray-200 rounded-lg shadow-sm 
-                    dark:bg-slate-700 dark:border-slate-600 dark:hover:bg-sleate-600"
-                >
+            <Card>
                 <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Solidez técnica, respaldo real</h5>
                 <Circle>
-                    
+                    <div>
+                        <div class="text-5xl font-bold text-white leading-none 
+                        group-hover:text-sky-300 transition-colors duration-500">
+                            20
+                        </div>
+                        <div class="text-white font-semibold -mt-1 group-hover:text-sky-300 transition-colors duration-500">
+                            Años de<br/>Experiencia
+                        </div>
+                    </div>    
                 </Circle>
-            </a>
+            </Card>
 
         </main>
     </section>
