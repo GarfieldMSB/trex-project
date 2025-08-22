@@ -1,4 +1,5 @@
 ---
+import Circle from '../components/Circle.astro';
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -6,17 +7,31 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Asesorías Informática TREX">
-    <section class="w-full mx-auto lg:w-[1180px] py-35">
+    <section class="w-full mx-auto lg:w-[1180px] py-10">
         <main class="">
-            <h1 class="text-7xl font-bold flex justify-center text-center pb-15">
+            <h1 class="text-7xl font-bold flex justify-center text-center pb-15 bg-gradient-to-r from-sky-800 to-blue-400 bg-clip-text text-transparent">
                 Cuando la experiencia transaccional se convierte en valor
             </h1>
-            <h2 class="text-xl opacity-80"><span>TREX</span> es una empresa de asesorías informáticas 
+            <h2 class="text-xl opacity-80 text-sky-900"><span>TREX</span> es una empresa de asesorías informáticas 
                 fundada en <span>2005</span>, especializada en el 
                 <span>sector financiero, productivo, y de servicios.</span>
                 Entregamos soliciones en <span>asesoría, seporte técnico y proyectos TI</span>
                 para impulsar la competitividad de nuestros clientes.
             </h2>
+
+            
+            <a 
+                href="#" 
+                class="block p-6 bg-white border w-full mt-10
+                    border-gray-200 rounded-lg shadow-sm 
+                    dark:bg-slate-700 dark:border-slate-600 dark:hover:bg-sleate-600"
+                >
+                <h5 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Solidez técnica, respaldo real</h5>
+                <Circle>
+                    
+                </Circle>
+            </a>
+
         </main>
     </section>
 </Layout>
