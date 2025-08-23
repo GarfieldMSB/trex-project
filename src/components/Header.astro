@@ -1,15 +1,10 @@
 ---
 import Button from "./Button.astro";
-import TrexLogo from "../assets/TREX_5.png";
+import Trex from "./icons/Trex.astro";
 ---
 
-<header class="mx-auto flex justify-between items-center py-7 w-[1220px]">
-    <img
-        class="w-30" 
-        src={TrexLogo.src} 
-        alt="Logo TREX"
-    />
-
+<header class="fixed top-0 w-full z-10 flex justify-between items-center px-15 py-4 text-[#304d6d]">
+    <Trex class=""/>
     <nav class="flex flex-row gap-x-20 opacity-80 items-center">
         <a href="/">Inicio</a>
         <a href="/nuestra-empresa">Nuestra empresa</a>
@@ -21,3 +16,27 @@ import TrexLogo from "../assets/TREX_5.png";
         </a>
     </nav>
 </header>
+
+<style>
+    header {
+        background: transparent;
+        animation: header-scroll 0.3s linear both;
+        animation-timeline: scroll();
+        animation-range: 0, 200px;
+        border-bottom: 1px solid transparent;
+    }
+
+    @keyframes header-scroll {
+        0% {
+            backdrop-filter: blur(0px);
+            background: transparent;
+        }
+
+        100% {
+            color: #ffffff;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, .5);
+            border-bottom-color: black;
+        }
+    }
+</style>

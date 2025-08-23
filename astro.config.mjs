@@ -9,5 +9,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   site: 'https://github.com/GarfieldMSB/trex-project', // 👈 URL final de GitHub Pages
-  base: '/trex-project/', // 👈 nombre del repo
+  base: '/', // 👈 nombre del repo
 });
