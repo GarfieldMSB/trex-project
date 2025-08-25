@@ -1,32 +1,62 @@
 ---
-import Card from "../components/Card.astro";
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-
 const services = await getCollection('services');
+const ICONS = import.meta.glob("/src/components/icons/*.astro", { eager: true });
+
+
+// Prepara datos mínimos para el cliente (solo lo necesario)
+const servicesData = services.map((s) => {
+  const { title, description, icon, projects } = s.data;
+  return {
+    id: s.slug ?? s.id,         // usa slug si existe
+    title,
+    description,
+    icon: icon ?? null,
+    projects: Array.isArray(projects) ? projects : []
+  };
+});
 ---
 
 <Layout title="Servicios y proyectos">
-    <section class="w-full mx-auto lg:w-[1180px] py-30">
-        <nav class="p-5 max-w-100">
+    <section class="w-full mx-auto lg:w-[1180px] py-30 flex gap-10">
+        <!-- Menu -->
+        <div class="w-100">
             <h5 class="text-3xl font-bold text-white bg-[#304D6D] p-4 rounded-t-lg">Servicios</h5>
-            <ul class="py-2 text-sm text-gray-700">
+            <ul id="services-menu" class="text-sm text-gray-700 overflow-auto">
                 {
-                    services.map(service => {
-                        const { data } = service;
-                        const { title, description, icon, projects } = data;
-
-                        return (
-                            <li>
-                                <a href="#"  class="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 
-                                dark:hover:text-white border-b transition-colors duration-200">
-                                    { title }
-                                </a>
-                            </li>
-                        )
-                    })
+                servicesData.map((s, idx) => (
+                    <li>
+                        <button
+                        type="button"
+                        data-id={s.id}
+                        class={`
+                                
+                                w-full text-left px-4 py-3 border-b transition-colors duration-200
+                                hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white 
+                                focus:outline-none focus:!bg-gray-600 focus:text-white
+                                ${idx === 0 ? 'aria-[current=true]:bg-gray-100' : ''}`}
+                        aria-current={idx === 0 ? 'true' : 'false'}
+                        >
+                        <div class="flex items-center gap-2">
+                            {
+                                s.icon && ICONS[s.icon]
+                                ? <ICONS[s.icon] class="w-5 h-5" alt="" />
+                                : null
+                            }
+                            <span class="font-medium">{s.title}</span>
+                        </div>
+                        </button>
+                    </li>
+                    ))
                 }
             </ul>
-        </nav>
+        </div>
+        <!-- Panel de detalle -->
+        <main class="w-full">
+            <div id="detail" class="p-5 min-h-[320px]">
+            <!-- Se llena por JS -->
+            </div>
+        </main>
     </section>
 </Layout>

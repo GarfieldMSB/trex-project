@@ -1,7 +1,7 @@
 ---
 title: Consultoría Técnica
 projects: NA
-icon: NA
+icon: Consulting
 description: Asesorías estratégicas para mejorar la competitividad tecnológica de tu empresa.
 ---
 

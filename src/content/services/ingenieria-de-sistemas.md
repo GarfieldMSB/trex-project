@@ -1,7 +1,7 @@
 ---
 title: Ingeniería de Sistemas
 projects: NA
-icon: NA
+icon: System
 description: Monitoreo y gestión técnica para garantizar el funcionamiento óptimo de tus plataformas.
 ---
 

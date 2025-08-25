@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+// Trae los servicios
+const services = await getCollection('services');
+
+// Prepara datos mínimos para el cliente (solo lo necesario)
+const servicesData = services.map((s) => {
+  const { title, description, icon, projects } = s.data;
+  return {
+    id: s.slug ?? s.id,         // usa slug si existe
+    title,
+    description,
+    icon: icon ?? null,
+    projects: Array.isArray(projects) ? projects : []
+  };
+});
+---
+
+<Layout title="Servicios y proyectos">
+  <section class="w-full mx-auto lg:w-[1180px] py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Menú -->
+      <aside class="border rounded-lg overflow-hidden">
+        <h5 class="text-3xl font-bold text-white bg-[#304D6D] p-4">Servicios</h5>
+
+        <ul id="services-menu" class="text-sm text-gray-700 max-h-[70vh] overflow-auto">
+          {
+            servicesData.map((s, idx) => (
+              <li>
+                <button
+                  type="button"
+                  data-id={s.id}
+                  class={`w-full text-left px-4 py-3 border-b transition-colors duration-200
+                           hover:bg-gray-100 focus:outline-none focus:ring
+                           ${idx === 0 ? 'bg-gray-50 aria-[current=true]:bg-gray-100' : ''}`}
+                  aria-current={idx === 0 ? 'true' : 'false'}
+                >
+                  <div class="flex items-center gap-2">
+                    { s.icon ? <img src={s.icon} alt="" class="w-5 h-5" /> : null }
+                    <span class="font-medium">{s.title}</span>
+                  </div>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+
+      <!-- Panel de detalle -->
+      <main class="lg:col-span-2">
+        <div id="detail" class="border rounded-lg p-5 min-h-[320px]">
+          <!-- Se llena por JS -->
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- Script mínimo para cambiar el panel -->
+  <script is:inline define:vars={{ servicesData }}>
+    // Utilidades
+    const $menu = document.getElementById('services-menu');
+    const $detail = document.getElementById('detail');
+
+    /** Renderiza el contenido a la derecha */
+    function renderDetail(item) {
+      const hasProjects = Array.isArray(item.projects) && item.projects.length > 0;
+
+      $detail.innerHTML = `
+        <h2 class="text-2xl font-bold mb-2 flex items-center gap-2">
+          ${item.icon ? `<img src="${item.icon}" alt="" class="w-6 h-6">` : ''}
+          ${item.title ?? ''}
+        </h2>
+        <p class="text-gray-700 leading-relaxed mb-4">${item.description ?? ''}</p>
+        ${hasProjects ? `
+          <div class="mt-4">
+            <h3 class="text-lg font-semibold mb-2">Proyectos relacionados</h3>
+            <ul class="list-disc pl-5 space-y-1">
+              ${item.projects.map(p => {
+                // Soporta { name, url } o string simple
+                const name = typeof p === 'string' ? p : (p.name ?? p.title ?? 'Proyecto');
+                const url  = typeof p === 'string' ? null : (p.url ?? p.link ?? null);
+                return url
+                  ? `<li><a href="${url}" class="underline hover:no-underline" target="_blank" rel="noopener noreferrer">${name}</a></li>`
+                  : `<li>${name}</li>`;
+              }).join('')}
+            </ul>
+          </div>
+        ` : ``}
+      `;
+    }
+
+    /** Activa un ítem en el menú y actualiza hash */
+    function activate(id) {
+      const buttons = Array.from($menu.querySelectorAll('button[data-id]'));
+      const btn = buttons.find(b => b.dataset.id === id) ?? buttons[0];
+      if (!btn) return;
+
+      buttons.forEach(b => b.setAttribute('aria-current', 'false'));
+      btn.setAttribute('aria-current', 'true');
+
+      const item = servicesData.find(s => s.id === btn.dataset.id) ?? servicesData[0];
+      renderDetail(item);
+
+      // actualiza hash para persistencia/enlace
+      if (item?.id) history.replaceState(null, '', `#${encodeURIComponent(item.id)}`);
+    }
+
+    // Clicks en el menú
+    $menu.addEventListener('click', (e) => {
+      const target = e.target.closest('button[data-id]');
+      if (!target) return;
+      e.preventDefault();
+      activate(target.dataset.id);
+    });
+
+    // Al cargar: si hay hash, usarlo; si no, el primero
+    const fromHash = decodeURIComponent(location.hash.replace('#',''));
+    const exists = servicesData.some(s => s.id === fromHash);
+    activate(exists ? fromHash : (servicesData[0]?.id));
+
+    // Si cambia el hash manualmente
+    window.addEventListener('hashchange', () => {
+      const h = decodeURIComponent(location.hash.replace('#',''));
+      if (servicesData.some(s => s.id === h)) activate(h);
+    });
+  </script>
+</Layout>

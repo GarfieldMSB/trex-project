@@ -1,7 +1,7 @@
 ---
 title: Servicio de Soporte
 projects: NA
-icon: NA
+icon: Support
 description: Atención especializada para resolver incidentes críticos y mantener la continuidad operativa.
 ---
 

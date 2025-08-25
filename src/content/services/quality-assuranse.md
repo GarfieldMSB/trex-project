@@ -1,7 +1,7 @@
 ---
 title: Quality Assurance (QA)
 projects: NA
-icon: NA
+icon: QualityAssurance
 description: Pruebas y certificación para asegurar calidad y rendimiento desde el desarrollo hasta la producción.
 ---
 

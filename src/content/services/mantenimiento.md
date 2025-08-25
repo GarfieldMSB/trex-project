@@ -1,7 +1,7 @@
 ---
 title: Mantenimiento
 projects: NA
-icon: NA
+icon: /src/components/icons/Maintenance.astro
 description: Mejoras y soporte continuo para asegurar la estabilidad de tus sistemas. 
 ---
 

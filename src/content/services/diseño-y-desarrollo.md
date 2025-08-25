@@ -1,7 +1,7 @@
 ---
 title: Diseño y Desarrollo
 projects: NA
-icon: NA
+icon: Design
 description: Soluciones de software personalizadas para optimizar procesos y reducir riesgos.
 ---
 
